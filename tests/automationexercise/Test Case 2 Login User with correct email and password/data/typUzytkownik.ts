@@ -1,0 +1,21 @@
+export type Uzytkownik = {
+  title: string;
+  name: string;
+  email: string;
+  password: string;
+  dateOfBirth: {
+    day: string;
+    month: string;
+    year: string;
+  };
+  firstName: string;
+  lastName: string;
+  company: string;
+  address1: string;
+  address2: string;
+  country: string;
+  state: string;
+  city: string;
+  zipcode: string;
+  mobileNumber: string;
+};
