@@ -1,6 +1,6 @@
-import { Page, expect } from "@playwright/test";
+import { Page } from "@playwright/test";
 import { User } from "../models/User";
-import { LoginPage } from "../pages/LoginPage.ts";
+import { LoginPage } from "../pages/Login.page.ts";
 import { CookieHelper } from "./CookieHelper";
 
 export async function LoginHelper(page: Page, user: User) {
@@ -21,6 +21,4 @@ export async function LoginHelper(page: Page, user: User) {
     await passwordInput.fill(user.password);
 
     await loginBtn.click();
-
-    await CookieHelper(page);
 }
