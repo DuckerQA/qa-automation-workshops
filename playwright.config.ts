@@ -11,6 +11,7 @@ export default defineConfig({
   reporter: "html",
   use: {
     trace: "on",
+    baseURL: "https://automationexercise.com",
   },
 
   /* Configure projects for major browsers */

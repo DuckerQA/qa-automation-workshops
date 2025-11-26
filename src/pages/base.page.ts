@@ -1,9 +1,9 @@
 import { Page } from "@playwright/test";
 
 export class BasePage {
-  url = "https://automationexercise.com/";
+  url = "";
 
-  constructor(private page: Page) {}
+  constructor(protected page: Page) {}
 
   async goto(): Promise<void> {
     await this.page.goto(this.url);

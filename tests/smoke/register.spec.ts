@@ -11,14 +11,12 @@ test.only("creating user with correct data @AE_01_01", async ({ page }) => {
   await expect(page).toHaveURL("https://automationexercise.com/");
   await registerPage.cookieHandler();
 
-  await page.getByRole("link", { name: "Signup / Login" }).click();
-  await expect(page.getByText("New User Signup!")).toBeVisible();
-  await page.locator('[data-qa="signup-name"]').fill(userName);
-  await page
-    .locator("form")
-    .filter({ hasText: "Signup" })
-    .getByPlaceholder("Email Address")
-    .fill("maciek12345@gmail.com");
+  await page.goto("/");
+  await registerPage.signupLoginLink.click();
+  await expect(registerPage.headerNewUserSignup).toBeVisible();
+  await registerPage.inputName.fill(userName);
+  await registerPage.inputEmail.fill("maciek12345@gmail.com");
+
   await page.getByRole("button", { name: "Signup" }).click();
   await expect(page.getByText("ENTER ACCOUNT INFORMATION")).toBeVisible();
   await page.getByRole("radio", { name: "Mr." }).check();
@@ -55,11 +53,11 @@ test.only("creating user with correct data @AE_01_01", async ({ page }) => {
 
   await page.getByRole("button", { name: "Create Account" }).click();
   await expect(page.getByText("ACCOUNT CREATED!")).toBeVisible();
-  await page.getByRole("link", { name: "Continue" }).click();
+  await registerPage.continueButton.click();
   await expect(page.getByText(`Logged in as ${userName}`)).toBeVisible();
   await page.getByRole("link", { name: "Delete Account" }).click();
 
   //Assert
   await expect(page.getByText("ACCOUNT DELETED!")).toBeVisible();
-  await page.getByRole("link", { name: "Continue" }).click();
+  await registerPage.continueButton.click();
 });
