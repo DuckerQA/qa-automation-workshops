@@ -1,10 +1,10 @@
 ✅ Next Steps
 
-- Create Page Object Model (POM)
-
-- Add test tags
-
 - Adjust tests to follow the AAA principle (Arrange–Act–Assert)
+- Create Page Object Model (POM)
+- Create Models
+- Implement Faker/Factories
+- Add test tags
 
 - Add .gitignore
 

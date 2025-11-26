@@ -10,6 +10,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     actionTimeout: 0,
+    baseURL: 'https://www.automationexercise.com',
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
