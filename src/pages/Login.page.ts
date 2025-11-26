@@ -15,6 +15,7 @@ export class LoginPage extends Base{
     readonly failureParagraph = this.page.locator('p:has-text("Your email or password is incorrect!")');
 
     async init(user: User){
+        await this.open();
         await this.cookieHandler();
 
         await this.emailInput.fill(user.email);

@@ -19,6 +19,6 @@ test("Test Case 2: Login User with correct email and password @AT_02", async({ p
 
 test.afterEach(async({page}) =>{
   const homePage:HomePage = new HomePage(page);
-  homePage.deleteAccountButton.click();
+  await homePage.deleteAccountButton.click();
   await expect(homePage.accountDeletedHeader).toBeVisible();
 })
