@@ -1,0 +1,1 @@
+Fixtures 📂 – Playwright fixtures create isolated setups for each test, ensuring independence and reusability while minimizing repetitive setup code.

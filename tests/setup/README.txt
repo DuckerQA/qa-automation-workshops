@@ -1,0 +1,1 @@
+Setup ⚙️ – Manages essential test setup configurations, such as database initialization or app login, through Playwright’s project dependency structure.

@@ -1,0 +1,18 @@
+{
+  "name": "Anna Nowak",
+  "firstName": "Anna",
+  "lastName": "Nowak",
+  "email": "annanowak@test.com",
+  "password": "Test123!",
+  "dateOfBirth": { "day": 12, "month": 7, "year": 1995 },
+  "newsletter": true,
+  "optin": true,
+  "country": "Singapore",
+  "address1": "Ulica 2",
+  "address2": "",
+  "state": "Pomorskie",
+  "city": "Gdańsk",
+  "zipcode": "80-001",
+  "mobileNumber": "987654321",
+  "title": "Ms"
+}

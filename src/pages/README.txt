@@ -1,0 +1,1 @@
+Pages 📄 – A Playwright classic! Store your Page Object Models (POMs) here to create reusable interactions with pages like HomePage.ts and ProductPage.ts.

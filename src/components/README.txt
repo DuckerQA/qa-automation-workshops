@@ -1,0 +1,1 @@
+Components ⚙️ – Reusable UI components like buttons, forms, and headers that make up the visual parts of your app.

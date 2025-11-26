@@ -1,0 +1,1 @@
+Models 📑 – Define data structures like User or Product models to ensure consistency and streamlined references in your tests.

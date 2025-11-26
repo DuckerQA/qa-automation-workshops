@@ -1,32 +1,22 @@
-import {test, expect} from '@playwright/test';
+import { Page, expect } from '@playwright/test';
+import { test } from "../../../../src/fixtures/userFixture.ts";
 
-import { rejestracjaHelper } from '../helpers/rejestracja.helper';
-import { sprawdzCiasteczkaHelper } from '../helpers/sprawdzCiasteczka.helper';
-import { logowanieHelper } from '../helpers/logowanie.helper';
-import { usunKontoHelper } from "../helpers/usunKonto.helper";
-
-import Uzytkownik from "../data/daneTestowe.json";
-
-
-test.beforeEach(async ({ page }) => {
-  await rejestracjaHelper.rejestracja(page, Uzytkownik);
-  await page.getByRole('link', { name: ' Logout' }).click();
-});
-
-test("Test Case 2: Login User with correct email and password", async({ page }) => {
-    await page.goto("http://automationexercise.com/");
-    
-    const consentBtn = page.locator("p.fc-button-label", { hasText: "Consent" });
-    if (await consentBtn.isVisible()) {
-        await consentBtn.click();
-    }
-
-    expect(page.getByRole('heading', { name: 'Login to your account' })).toBeVisible();
+import { HomePage } from "../../../../src/pages/HomePage.ts";
+import { User } from "../../../../src/models/User.ts";
+import { SetupUser } from "../../../setup/SetupUser.ts";
+import { CookieHelper } from "../../../../src/helpers/CookieHelper.ts";
+import { LoginHelper } from '../../../../src/helpers/LoginHelper.ts';
 
 
+test.beforeEach(async({page, user}) => {
+  await SetupUser(page, user);
+})
 
-    await logowanieHelper.zaloguj(page, Uzytkownik);
+test("Test Case 2: Login User with correct email and password", async({ page, user}) => {
+    await CookieHelper(page);
+    await LoginHelper(page, user);
+})
 
-    await usunKontoHelper.usunKonto(page);
-
+test.afterEach(async({page}) =>{
+  await page.locator('a:has-text("Delete Account")').click();
 })
