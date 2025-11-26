@@ -51,11 +51,13 @@ export class SignUpPage extends Base{
         await this.createAccountButton.click();
     }
 
-    //deletion
-    readonly deleteAccountButton = this.page.getByRole('link', {
-        name: 'Delete Account',
-    });
-    readonly accountDeletedHeader = this.page.getByText('Account Deleted!');
+    //register
+    async Register(user: User){
+        await this.cookieHandler();
+        
+        await this.init(user);
+        await this.fillContact(user);
+    }
 
     //verification
     get accountCreatedHeader() {

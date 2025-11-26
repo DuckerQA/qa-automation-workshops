@@ -2,23 +2,9 @@
 import { test as base } from "@playwright/test";
 import { User } from "../models/User";
 import { Country } from "../models/Country";
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomString(length: number) {
-  const chars = "abcdefghijklmnopqrstuvwxyz";
-  let str = "";
-  for (let i = 0; i < length; i++) {
-    str += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return str;
-}
-
-function randomEmail() {
-  return `test_${Date.now()}_${randomInt(1000, 9999)}@mail.com`;
-}
+import { randomInt } from "../factories/randomInt.ts";
+import { randomString } from "../factories/randomString.ts";
+import { randomEmail } from "../factories/randomEmail.ts";
 
 const countries: Country[] = [
   "India",
