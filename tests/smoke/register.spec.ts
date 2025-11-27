@@ -1,63 +1,63 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { RegisterPage } from "../../src/pages/register.page";
 
-test.only("creating user with correct data @AE_01_01", async ({ page }) => {
+test("register user with correct data @AUT_01-01", async ({ page }) => {
   //Arrange
-  const userName = "maciej";
   const registerPage = new RegisterPage(page);
+  const initData = {
+    name: "maciektestuser",
+    email: "maciektestuser@test.com",
+  };
+  const userData = {
+    password: "TestPassword123!",
+    day: "10",
+    month: "May",
+    year: "1990",
+    firstName: "Maciek",
+    lastName: "Testowy",
+    company: "Test Company",
+    address1: "123 Test St",
+    address2: "Apt 4",
+    country: "Canada",
+    state: "Test State",
+    city: "Test City",
+    zipcode: "T3S 1T2",
+    mobileNumber: "+1234567890",
+  };
 
   //Act
   await registerPage.goto();
-  await expect(page).toHaveURL("https://automationexercise.com/");
+  await registerPage.getTitle();
+  await expect(page).toHaveURL(/.*automationexercise.com/);
   await registerPage.cookieHandler();
 
-  await page.goto("/");
-  await registerPage.signupLoginLink.click();
+  await registerPage.signUpLoginButton.click();
   await expect(registerPage.headerNewUserSignup).toBeVisible();
-  await registerPage.inputName.fill(userName);
-  await registerPage.inputEmail.fill("maciek12345@gmail.com");
 
-  await page.getByRole("button", { name: "Signup" }).click();
-  await expect(page.getByText("ENTER ACCOUNT INFORMATION")).toBeVisible();
-  await page.getByRole("radio", { name: "Mr." }).check();
-  await page.getByRole("textbox", { name: "Password *" }).fill("nowehaslo");
-  await page.locator("#days").selectOption("2");
-  await page.locator("#months").selectOption("2");
-  await page.locator("#years").selectOption("2019");
-  await page.getByText("Sign up for our newsletter!").click();
-  await page
-    .getByRole("checkbox", { name: "Receive special offers from" })
-    .check();
-  await page
-    .getByRole("textbox", { name: "First name *" })
-    .fill("hdfhdfhdfhdf");
-  await page.getByRole("textbox", { name: "Last name *" }).fill("dsghhdghfgd");
-  await page
-    .getByRole("textbox", { name: "Company", exact: true })
-    .fill("gaggadgfg");
-  await page
-    .getByRole("textbox", { name: "Address * (Street address, P." })
-    .fill("hfdhhdfhdfhdfdhf");
-  await page
-    .getByRole("textbox", { name: "Address 2" })
-    .fill("hdfhdfhdfdhfhdfdh");
-  await page.getByLabel("Country *").selectOption("United States");
-  await page.getByRole("textbox", { name: "State *" }).fill("dhfhdf");
-  await page
-    .getByRole("textbox", { name: "City * Zipcode *" })
-    .fill("hdfhdfdhfhdfh");
-  await page.locator("#zipcode").fill("21-500");
-  await page
-    .getByRole("textbox", { name: "Mobile Number *" })
-    .fill("123456789");
+  await registerPage.initAccountCreation(initData.name, initData.email);
+  await registerPage.completeRegistrationDetails(
+    userData.password,
+    userData.day,
+    userData.month,
+    userData.year,
+    userData.firstName,
+    userData.lastName,
+    userData.company,
+    userData.address1,
+    userData.address2,
+    userData.country,
+    userData.state,
+    userData.city,
+    userData.zipcode,
+    userData.mobileNumber
+  );
 
-  await page.getByRole("button", { name: "Create Account" }).click();
-  await expect(page.getByText("ACCOUNT CREATED!")).toBeVisible();
+  await expect(registerPage.accountCreatedHeader).toBeVisible();
   await registerPage.continueButton.click();
-  await expect(page.getByText(`Logged in as ${userName}`)).toBeVisible();
-  await page.getByRole("link", { name: "Delete Account" }).click();
 
   //Assert
-  await expect(page.getByText("ACCOUNT DELETED!")).toBeVisible();
+  await expect(registerPage.loggedInAs(initData.name)).toBeVisible();
+  await registerPage.deleteAccountButton.click();
+  await expect(registerPage.accountDeletedHeader).toBeVisible();
   await registerPage.continueButton.click();
 });
