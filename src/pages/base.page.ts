@@ -1,7 +1,7 @@
-import { Page } from "@playwright/test";
+import { Page } from '@playwright/test';
 
 export class BasePage {
-  readonly url: string = "";
+  readonly url: string = '';
   constructor(protected page: Page) {}
 
   async open(): Promise<void> {
@@ -9,7 +9,7 @@ export class BasePage {
   }
 
   async getTitle(): Promise<string> {
-    await this.page.waitForLoadState("load");
+    await this.page.waitForLoadState('load');
     return this.page.title();
   }
 
@@ -19,10 +19,10 @@ export class BasePage {
 
   async cookieHandler(): Promise<void> {
     await this.page.addLocatorHandler(
-      this.page.locator(".fc-dialog-headline"),
+      this.page.locator('.fc-dialog-headline'),
       async () => {
-        await this.page.getByRole("button", { name: "Consent" }).click();
-      }
+        await this.page.getByRole('button', { name: 'Consent' }).click();
+      },
     );
   }
 }

@@ -17,25 +17,25 @@ export default tseslint.config(
       globals: globals.node,
       parserOptions: {
         ecmaVersion: 'latest',
-        sourceType: 'module'
-      }
+        sourceType: 'module',
+      },
     },
     rules: {
       'no-console': 'warn',
       'no-var': 'error',
       'playwright/no-nested-steps': 'off',
-      '@typescript-eslint/explicit-function-return-type': 'error'
-    }
+      '@typescript-eslint/explicit-function-return-type': 'error',
+    },
   },
   {
     files: ['**/*.js'],
     languageOptions: {
-      globals: globals.node
+      globals: globals.node,
     },
     rules: {
       'no-console': 'warn',
-      'no-var': 'error'
-    }
+      'no-var': 'error',
+    },
   },
   {
     ...playwright.configs['flat/recommended'],
@@ -46,7 +46,7 @@ export default tseslint.config(
       'playwright/no-wait-for-timeout': 'warn',
       'playwright/no-page-pause': 'error',
       'playwright/no-element-handle': 'warn',
-      '@typescript-eslint/explicit-function-return-type': 'off'
-    }
-  }
+      '@typescript-eslint/explicit-function-return-type': 'off',
+    },
+  },
 );
