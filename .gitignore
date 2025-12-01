@@ -1,8 +1,26 @@
-
-# Playwright
+# Node modules
 node_modules/
+
+# Environment
+.env
+
+# Playwright test results and reports
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# System files (Windows, macOS)
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Optional: editor configs
+.vscode/
+.idea/
