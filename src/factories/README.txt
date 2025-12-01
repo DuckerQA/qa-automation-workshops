@@ -1,0 +1,1 @@
+Factories 🛠️ – Generate test data on demand with this folder. Factory functions help you mock profiles, orders, and various data types, simplifying testing.
