@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
@@ -11,7 +15,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     trace: 'on',
-    baseURL: 'https://automationexercise.com',
+    baseURL: process.env.baseURL,
   },
 
   /* Configure projects for major browsers */
