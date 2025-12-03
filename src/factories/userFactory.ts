@@ -1,5 +1,3 @@
-import fs from 'fs/promises';
-
 import { UserContactInfo, UserSignupInfo } from '../models/user.model';
 
 const countries: string[] = [
@@ -12,7 +10,7 @@ const countries: string[] = [
   'Singapore',
 ];
 
-async function generateUserSignupInfo(): Promise<UserSignupInfo> {
+export async function generateUserSignupInfo(): Promise<UserSignupInfo> {
   const { faker } = await import('@faker-js/faker');
   return {
     name: faker.person.fullName(),
@@ -20,7 +18,7 @@ async function generateUserSignupInfo(): Promise<UserSignupInfo> {
   };
 }
 
-async function generateUserContactInfo(): Promise<UserContactInfo> {
+export async function generateUserContactInfo(): Promise<UserContactInfo> {
   const { faker } = await import('@faker-js/faker');
   return {
     firstName: faker.person.firstName(),
@@ -53,6 +51,7 @@ async function generateUserContactInfo(): Promise<UserContactInfo> {
   };
 }
 
+/*
 export async function saveToEnv(): Promise<void> {
   const signup = await generateUserSignupInfo();
   const contact = await generateUserContactInfo();
@@ -81,3 +80,4 @@ OPTIN=${contact.optin}
 
   await fs.writeFile('.env', envContent.trim());
 }
+*/
