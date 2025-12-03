@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
+import { UserContactInfo, UserSignupInfo } from '../models/user.model';
 import { BasePage } from './base.page';
 
 export class RegisterPage extends BasePage {
@@ -58,56 +59,50 @@ export class RegisterPage extends BasePage {
     super(page);
   }
 
-  async initAccountCreation(
-    userName: string,
-    userEmail: string,
-  ): Promise<void> {
-    await this.signUpNameInput.fill(userName);
-    await this.signUpEmailInput.fill(userEmail);
+  async initAccountCreation(userSignupInfo: UserSignupInfo): Promise<void> {
+    await this.signUpNameInput.fill(userSignupInfo.name);
+    await this.signUpEmailInput.fill(userSignupInfo.email);
     await this.signUpButton.click();
   }
 
   async completeRegistrationDetails(
-    userPassword: string,
-    birthDay: string,
-    birthMonth: string,
-    birthYear: string,
-    firstName: string,
-    lastName: string,
-    address1: string,
-    country: string,
-    state: string,
-    city: string,
-    zipcode: string,
-    mobileNumber: string,
-    company?: string,
-    address2?: string,
+    userContactInfo: UserContactInfo,
   ): Promise<void> {
     //Account Info
     await this.genderMaleOption.click();
-    await this.passwordInput.fill(userPassword);
-    await this.birthDaySelect.selectOption(birthDay);
-    await this.birthMonthSelect.selectOption(birthMonth);
-    await this.birthYearSelect.selectOption(birthYear);
+    await this.passwordInput.fill(userContactInfo.password);
+    await this.birthDaySelect.selectOption(
+      userContactInfo.dateOfBirth.day.toString(),
+    );
+    await this.birthMonthSelect.selectOption(
+      userContactInfo.dateOfBirth.month.toString(),
+    );
+    await this.birthYearSelect.selectOption(
+      userContactInfo.dateOfBirth.year.toString(),
+    );
     await this.newsletterCheckbox.check();
     await this.offersCheckbox.check();
 
     //Address Info
-    await this.firstNameInput.fill(firstName);
-    await this.lastNameInput.fill(lastName);
-    await this.companyInput.fill(company ? company : '');
-    await this.address1Input.fill(address1);
-    await this.address2Input.fill(address2 ? address2 : '');
-    await this.countrySelect.selectOption(country);
-    await this.stateInput.fill(state);
-    await this.cityInput.fill(city);
-    await this.zipcodeInput.fill(zipcode);
-    await this.mobileNumberInput.fill(mobileNumber);
+    await this.firstNameInput.fill(userContactInfo.firstName);
+    await this.lastNameInput.fill(userContactInfo.lastName);
+    await this.companyInput.fill(
+      userContactInfo.company ? userContactInfo.company : '',
+    );
+    await this.address1Input.fill(userContactInfo.address1);
+    await this.address2Input.fill(
+      userContactInfo.address2 ? userContactInfo.address2 : '',
+    );
+    await this.countrySelect.selectOption(userContactInfo.country);
+    await this.stateInput.fill(userContactInfo.state);
+    await this.cityInput.fill(userContactInfo.city);
+    await this.zipcodeInput.fill(userContactInfo.zipcode);
+    await this.mobileNumberInput.fill(userContactInfo.mobileNumber);
     await this.createAccountButton.click();
   }
 
-  loggedInAs(userName: string): Locator {
-    return this.page.getByText(`Logged in as ${userName}`);
+  loggedInAs(userSignupInfo: UserSignupInfo): Locator {
+    return this.page.getByText(`Logged in as ${userSignupInfo.name}`);
   }
 
   async logOut(): Promise<void> {
