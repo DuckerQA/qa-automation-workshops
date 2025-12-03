@@ -1,10 +1,14 @@
 import { expect, test } from '@playwright/test';
 
+import dotenv from 'dotenv';
+
 import {
   generateUserContactInfo,
   generateUserSignupInfo,
 } from '../../src/factories/userFactory';
 import { RegisterPage } from '../../src/pages/register.page';
+
+dotenv.config();
 
 let userSignupInfo: ReturnType<typeof generateUserSignupInfo>;
 let userContactInfo: ReturnType<typeof generateUserContactInfo>;
@@ -17,6 +21,8 @@ test.beforeEach(async () => {
 test('Case 1: Register User @AUT_01', async ({ page }) => {
   //Arrange
   const registerPage = new RegisterPage(page);
+  const signupData = await userSignupInfo;
+  const contactData = await userContactInfo;
   //Act
   await test.step('Open page and accept cookies', async () => {
     await registerPage.open();
@@ -29,37 +35,17 @@ test('Case 1: Register User @AUT_01', async ({ page }) => {
     await registerPage.signUpLoginButton.click();
     await expect(registerPage.headerNewUserSignup).toBeVisible();
 
-    await registerPage.initAccountCreation(
-      (await userSignupInfo).name,
-      (await userSignupInfo).email,
-    );
+    await registerPage.initAccountCreation(signupData);
   });
 
   await test.step('Complete registration details', async () => {
-    await registerPage.completeRegistrationDetails(
-      (await userContactInfo).password,
-      String((await userContactInfo).dateOfBirth.day),
-      String((await userContactInfo).dateOfBirth.month),
-      String((await userContactInfo).dateOfBirth.year),
-      (await userContactInfo).firstName,
-      (await userContactInfo).lastName,
-      (await userContactInfo).address1,
-      (await userContactInfo).country,
-      (await userContactInfo).state,
-      (await userContactInfo).city,
-      (await userContactInfo).zipcode,
-      (await userContactInfo).mobileNumber,
-      (await userContactInfo).company || '',
-      (await userContactInfo).address2 || '',
-    );
+    await registerPage.completeRegistrationDetails(contactData);
   });
 
   await test.step('Verify account creation', async () => {
     await expect(registerPage.accountCreatedHeader).toBeVisible();
     await registerPage.continueButton.click();
-    await expect(
-      registerPage.loggedInAs((await userSignupInfo).name),
-    ).toBeVisible();
+    await expect(registerPage.loggedInAs(signupData)).toBeVisible();
   });
 
   //Assert
