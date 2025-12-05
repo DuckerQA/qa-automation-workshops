@@ -24,12 +24,20 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install chromium --with-deps
 
-      - name: Run Playwright tests
+      - name: Verify BASE_URL exists
+        run: |
+          if [ -z "${BASE_URL}" ]; then
+          echo "❌ BASE_URL is not set!"
+          exit 1
+          fi
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
+      - name: Run Playwright tests
         run: npx playwright test
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
 
       - name: Upload HTML report
         if: always()
