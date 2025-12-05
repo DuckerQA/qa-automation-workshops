@@ -15,7 +15,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     trace: 'on',
-    baseURL: process.env.baseURL,
+    baseURL: process.env.BASE_URL,
   },
 
   /* Configure projects for major browsers */
