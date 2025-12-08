@@ -27,7 +27,7 @@ test('Case 1: Register User @AUT_01', async ({ page }) => {
   await test.step('Open page and accept cookies', async () => {
     await registerPage.open();
     await registerPage.getTitle();
-    await expect(page).toHaveURL(process.env.baseURL!);
+    await expect(page).toHaveURL(process.env.BASE_URL!);
     await registerPage.cookieHandler();
   });
 
