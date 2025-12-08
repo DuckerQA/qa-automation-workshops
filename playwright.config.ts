@@ -11,14 +11,26 @@ export default defineConfig({
     timeout: 5000,
   },
   timeout: 30000,
-  retries: 0,
-  reporter: 'html',
+
+  reporter: [
+    [
+      'playwright-smart-reporter',
+      {
+        outputFile: 'smart-report.html',
+        historyFile: 'test-history.json',
+        maxHistoryRuns: 10,
+        performanceThreshold: 0.2,
+        slackWebhook: process.env.SLACK_URL,
+        teamsWebhook: process.env.TEAMS_URL,
+      },
+    ],
+  ],
+
   use: {
     trace: 'on',
     baseURL: process.env.BASE_URL,
   },
 
-  /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
