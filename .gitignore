@@ -24,3 +24,4 @@ pnpm-debug.log*
 # Optional: editor configs
 .vscode/
 .idea/
+tests/test-history.json
